@@ -1,41 +1,64 @@
 package com.eprs.ui;
+
+import com.eprs.dao.UserDao;
+import com.eprs.model.User;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class AdminMenu {
-    public static final Scanner sc = new Scanner(System.in);
+    private final UserDao userDao;
+    private final Scanner scanner;
 
-    public void adminDashboard(String name, String role) {
-        boolean running = true;
+    public AdminMenu(UserDao userDao, Scanner scanner) {
+        this.userDao = userDao;
+        this.scanner = scanner;
+    }
 
-        while (running) {
-            System.out.println("\n============================");
+    public void display(User admin) {
+        boolean loggedIn = true;
+
+        while (loggedIn) {
+            System.out.println("============================");
             System.out.println("====== ADMIN DASHBOARD =====");
             System.out.println("============================");
-            System.out.println("Welcome, "+ name + "!" + " Role: " + role);
-            System.out.println("1. Add User");
-            System.out.println("2. View User");
-            System.out.println("3. Update User");
-            System.out.println("4. Delete User");
-            System.out.println("5. View Account Details");
-            System.out.println("6. Logout");
+            System.out.println("1. View All User");
+            System.out.println("2. Add User");
+            System.out.println("3. View Pending User Approvals");
+            System.out.println("4. Approve User Registration");
+            System.out.println("5. Update User role / Status");
+            System.out.println("6. Delete User");
+            System.out.println("7. Logout");
             System.out.print("Select: ");
-            int select = sc.nextInt();
+
+            int select = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
             switch (select) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    running = false;
-                    break;
+                case 1 -> viewAllUser();
+                default -> System.out.println("-> [ERROR] Invalid Option.");
             }
         }
+    }
+
+    // These methods must be OUTSIDE the display method, right inside the AdminMenu class
+    private void displayUserTable(List<User> users, String title) {
+        System.out.println("===================================" + title + "===================================");
+        if (users.isEmpty()) {
+            System.out.println("-> No Records Found");
+            return;
+        }
+        System.out.println("+-----+----------------+------------+------------+");
+        System.out.printf("| %-3s | %-15s | %-10s | %-10s |\n", "ID", "Username", "Role", "Status");
+        System.out.println("+-----+----------------+------------+------------+");
+        for (User u : users) {
+            System.out.printf("| %-3s | %-15s | %-10s | %-10s |\n",
+                    u.id(), u.username(), u.roles(), u.status());
+        }
+        System.out.println("+-----+----------------+------------+------------+");
+    }
+
+    private void viewAllUser() {
+        displayUserTable(userDao.getAllUsers(), "ALL REGISTERED USER");
     }
 }
