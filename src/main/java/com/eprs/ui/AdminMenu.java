@@ -36,29 +36,57 @@ public class AdminMenu {
 
             switch (select) {
                 case 1 -> viewAllUser();
+                //case 2
+                case  3 -> viewPendingUser();
+                case 4 -> approveUser();
+                case 7 -> loggedIn = false;
                 default -> System.out.println("-> [ERROR] Invalid Option.");
             }
         }
     }
 
-    // These methods must be OUTSIDE the display method, right inside the AdminMenu class
     private void displayUserTable(List<User> users, String title) {
         System.out.println("===================================" + title + "===================================");
         if (users.isEmpty()) {
             System.out.println("-> No Records Found");
             return;
         }
-        System.out.println("+-----+----------------+------------+------------+");
-        System.out.printf("| %-3s | %-15s | %-10s | %-10s |\n", "ID", "Username", "Role", "Status");
-        System.out.println("+-----+----------------+------------+------------+");
+        String border = "+-----+-----------------+---------------------------+------------+";
+        System.out.println(border);
+        System.out.printf("| %-3s | %-15s | %-25s | %-10s |\n", "ID", "Username", "Role", "Status");
+        System.out.println(border);
         for (User u : users) {
-            System.out.printf("| %-3s | %-15s | %-10s | %-10s |\n",
+            System.out.printf("| %-3s | %-15s | %-25s | %-10s |\n",
                     u.id(), u.username(), u.roles(), u.status());
         }
-        System.out.println("+-----+----------------+------------+------------+");
+        System.out.println(border);
     }
 
     private void viewAllUser() {
         displayUserTable(userDao.getAllUsers(), "ALL REGISTERED USER");
+    }
+
+    private void viewPendingUser(){
+        displayUserTable(userDao.getPendingUser(), "PENDING APPROVALS");
+    }
+
+    private void approveUser(){
+        List<User> pendingUsers = userDao.getPendingUser();
+        displayUserTable(pendingUsers, "PENDING APPROVALS");
+
+        if (pendingUsers.isEmpty()){
+            return;
+        }
+         System.out.print("Enter User ID to Approve (or 0 to cancel): ");
+                int userID = scanner.nextInt();
+        if (userID == 0){
+            System.out.println("-> Operation Cancelled by the User");
+        }
+        boolean exits = pendingUsers.stream().anyMatch(u -> u.id() ==userID );
+        if (!exits){
+            System.out.println("[ERROR] User ID not found.");
+            return;
+        }
+        userDao.approveUser(userID);
     }
 }
