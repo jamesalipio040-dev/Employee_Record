@@ -49,6 +49,7 @@ public class Authentication {
                         break;
                     case "3":
                         role = "Payroll Supervisor";
+                        break;
                     case "4":
                         role = "Employee";
                         break;
