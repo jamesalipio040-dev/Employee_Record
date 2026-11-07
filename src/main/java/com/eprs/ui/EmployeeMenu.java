@@ -1,21 +1,26 @@
 package com.eprs.ui;
+import com.eprs.model.User;
+
 import  java.util.Scanner;
 
 public class EmployeeMenu {
-    public static final Scanner sc = new Scanner(System.in);
-    boolean running = true;
+    public final Scanner scanner;
 
-    public void employeeDashbaord(String name, String role) {
-        while (running) {
+    public EmployeeMenu (Scanner scanner){
+        this.scanner = scanner;
+    }
+
+    public void display(User Employee) {
+        boolean loggedIn = true;
+        while (loggedIn) {
             System.out.println("\n============================");
             System.out.println("==== EMPLOYEE DASHBOARD ====");
             System.out.println("============================");
-            System.out.println("Welcome, "+ name + "!" + " Role: " + role);
             System.out.println("1. view my Payroll");
             System.out.println("2. view Account details");
             System.out.println("3. Logout");
             System.out.print("Select: ");
-            int select = sc.nextInt();
+            int select = scanner.nextInt();
 
             switch (select) {
                 case 1:
@@ -23,7 +28,7 @@ public class EmployeeMenu {
                 case 2:
                     break;
                 case 3:
-                    running = false;
+                    loggedIn = false;
                     break;
             }
         }

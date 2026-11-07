@@ -174,4 +174,16 @@ public class UserDao {
         }
         return  false;
     }
+
+    public void deleteUser(int userId) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("[ERROR] Failed to delete user: " + e.getMessage());
+        }
+    }
+
 }
