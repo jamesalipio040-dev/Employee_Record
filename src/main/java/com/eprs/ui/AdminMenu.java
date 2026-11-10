@@ -32,7 +32,7 @@ public class AdminMenu {
             System.out.println("4. Approve User Registration");
             System.out.println("5. Update User role / Status");
             System.out.println("6. Delete User");
-            System.out.println("7. View System Audit Logs"); // New Audit Log Option
+            System.out.println("7. View System Audit Logs");
             System.out.println("8. Logout");
             System.out.print("Select: ");
 
@@ -150,7 +150,6 @@ public class AdminMenu {
 
         userDao.approveUser(userID);
 
-        // Automated Logging for Account Approval
         logDao.logActivity(currentAdmin.id(), currentAdmin.username(), "Admin approved account for User ID " + userID);
         System.out.println("-> [SUCCESS] User ID " + userID + " approved successfully.");
     }
