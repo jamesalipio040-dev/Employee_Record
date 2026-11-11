@@ -41,7 +41,7 @@ public class AccountantMenu {
                     addPayroll();
                     break;
                 case 2:
-
+                    viewpayroll() ;
                     break;
                 case 3:
                     break;
@@ -163,6 +163,9 @@ public class AccountantMenu {
                     p.late(), p.absent(), p.sss(), p.pag_ibig(), p.philhealth(), p.tax(), p.gross_salary(), p.net_pay());
         }
         System.out.println(border);
+    }
+    private void viewPayroll() {
+        displayPayrolltable(payrollDao.getPayroll(), "PAYROLL ENTRIES") ;
     }
 
 }
