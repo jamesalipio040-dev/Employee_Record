@@ -1,6 +1,7 @@
 package com.eprs.dao;
 
 import com.eprs.model.ActivityLog;
+import com.eprs.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -70,5 +71,6 @@ public class ActivityLogDao {
         }
         return logs;
     }
+
 
 }

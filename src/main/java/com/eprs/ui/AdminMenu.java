@@ -186,7 +186,6 @@ public class AdminMenu {
 
         userDao.updateUserAndStatus(userId, newRole, newStatus);
 
-        // Automated Logging for Role/Status Updates
         logDao.logActivity(currentAdmin.id(), currentAdmin.username(), "Admin Changed role of User " + userId + " to " + newRole);
         System.out.println("-> [SUCCESS] User ID " + userId + " updated successfully.");
     }
