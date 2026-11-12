@@ -15,7 +15,8 @@ public record Payroll(
         double tax,
         double gross_salary,
         double total_deductions,
-        double net_pay
+        double net_pay,
+        String p_status
 ) {
     @Override
     public String toString() {
@@ -24,11 +25,11 @@ public record Payroll(
                         "  Hourly Rate: %d | Total Hours: %d | Basic Pay: %d%n" +
                         "  Late: %d | Absent: %d%n" +
                         "  SSS: %.2f | Pag-IBIG: %.2f | PhilHealth: %.2f | Tax: %.2f%n" +
-                        "  Gross: %.2f | Total Deductions: %.2f | NET PAY: %.2f",
+                        "  Gross: %.2f | Total Deductions: %.2f | NET PAY: %.2f | STATUS: %s",
                 p_id, emp_name, month,
                 h_rate, total_hours, basic_pay,
                 late, absent,
                 sss, pag_ibig, philhealth, tax,
-                gross_salary, total_deductions, net_pay);
+                gross_salary, total_deductions, net_pay, p_status);
     }
 }

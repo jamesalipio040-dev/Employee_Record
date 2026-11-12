@@ -12,8 +12,8 @@ public class PayrollDao {
     public boolean addPayroll(Payroll p) {
         String sql = """
                 INSERT INTO payroll (emp_name, month, h_rate, total_hours, basic_pay, late, absent,
-                sss, pag_ibig, philhealth, tax, gross_salary, total_deductions, net_pay)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                sss, pag_ibig, philhealth, tax, gross_salary, total_deductions, net_pay, p_status)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'PENDING')
                 """;
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -33,7 +33,6 @@ public class PayrollDao {
             pstmt.setDouble(12, p.gross_salary());
             pstmt.setDouble(13, p.total_deductions());
             pstmt.setDouble(14, p.net_pay());
-
             return pstmt.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -44,7 +43,7 @@ public class PayrollDao {
 
     public List<Payroll> getAllPayroll() {
         List<Payroll> payrollList = new ArrayList<>();
-        String sql = "SELECT id, emp_name, month, h_rate, total_hours, basic_pay, late, absent, sss, pag_ibig, philhealth, tax, gross_salary, total_deductions, net_pay FROM payroll";
+        String sql = "SELECT id, emp_name, month, h_rate, total_hours, basic_pay, late, absent, sss, pag_ibig, philhealth, tax, gross_salary, total_deductions, net_pay, p_status FROM payroll";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -66,7 +65,8 @@ public class PayrollDao {
                         rs.getDouble("tax"),
                         rs.getDouble("gross_salary"),
                         rs.getDouble("total_deductions"),
-                        rs.getDouble("net_pay")
+                        rs.getDouble("net_pay"),
+                        rs.getString("p_status")
                 ));
             }
         } catch (SQLException e) {

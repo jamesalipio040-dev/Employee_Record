@@ -24,7 +24,7 @@ public class PayrollCalculator {
 
         return new Payroll(pId, empName, month, hRate, totalHours, basicPay,
                 late, absent, round(sss), round(pagIbig), round(philhealth), round(tax),
-                round(gross), round(totalDeductions), round(netPay));
+                round(gross), round(totalDeductions), round(netPay), "PENDING");
     }
 
     private static double computeTax(double taxable) {

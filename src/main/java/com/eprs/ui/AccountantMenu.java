@@ -41,7 +41,7 @@ public class AccountantMenu {
                     addPayroll();
                     break;
                 case 2:
-                    viewpayroll() ;
+                    viewPayroll();
                     break;
                 case 3:
                     break;
@@ -151,21 +151,21 @@ public class AccountantMenu {
             return;
         }
 
-        String border = "+-----+-----------------+---------+-------+-------+-----------+------+--------+---------+----------+------------+----------+-------------------+----------+";
+        String border = "+-----+-----------------+---------+-------+-------+-----------+------+--------+---------+----------+------------+----------+-------------------+----------+----------+";
         System.out.println(border);
-        System.out.printf("| %-3s | %-15s | %-7s | %-5s | %-5s | %-9s | %-4s | %-6s | %-7s | %-8s | %-10s | %-8s | %-17s | %-8s |\n",
+        System.out.printf("| %-3s | %-15s | %-7s | %-5s | %-5s | %-9s | %-4s | %-6s | %-7s | %-8s | %-10s | %-8s | %-17s | %-8s | %-10s|\n",
                 "ID", "Employee", "Month", "Rate", "Hours", "Basic Pay", "Late", "Absent", "SSS", "Pag-IBIG", "PhilHealth", "Tax", "Gross", "Net Pay");
         System.out.println(border);
 
         for (Payroll p : payrolls) {
             System.out.printf("| %-3d | %-15s | %-7s | %-5d | %-5d | %-9.2f | %-4d | %-6d | %-7.2f | %-8.2f | %-10.2f | %-8.2f | %-17.2f | %-8.2f |\n",
                     p.p_id(), p.emp_name(), p.month(), p.h_rate(), p.total_hours(), (double) p.basic_pay(),
-                    p.late(), p.absent(), p.sss(), p.pag_ibig(), p.philhealth(), p.tax(), p.gross_salary(), p.net_pay());
+                    p.late(), p.absent(), p.sss(), p.pag_ibig(), p.philhealth(), p.tax(), p.gross_salary(), p.net_pay(), p.p_status());
         }
         System.out.println(border);
     }
     private void viewPayroll() {
-        displayPayrolltable(payrollDao.getPayroll(), "PAYROLL ENTRIES") ;
+        displayPayrolltable(payrollDao.getAllPayroll(), "PAYROLL ENTRIES") ;
     }
 
 }
