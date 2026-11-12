@@ -6,6 +6,7 @@ public record Payroll(
         String month,
         int h_rate,
         int total_hours,
+        double overtime,
         int basic_pay,
         int late,
         int absent,
@@ -22,12 +23,12 @@ public record Payroll(
     public String toString() {
         return String.format(
                 "[%d] %s (%s)%n" +
-                        "  Hourly Rate: %d | Total Hours: %d | Basic Pay: %d%n" +
+                        "  Hourly Rate: %d | Total Hours: %d | Overtime: %.2f | Basic Pay: %d%n" +
                         "  Late: %d | Absent: %d%n" +
                         "  SSS: %.2f | Pag-IBIG: %.2f | PhilHealth: %.2f | Tax: %.2f%n" +
                         "  Gross: %.2f | Total Deductions: %.2f | NET PAY: %.2f | STATUS: %s",
                 p_id, emp_name, month,
-                h_rate, total_hours, basic_pay,
+                h_rate, total_hours, overtime, basic_pay,
                 late, absent,
                 sss, pag_ibig, philhealth, tax,
                 gross_salary, total_deductions, net_pay, p_status);
