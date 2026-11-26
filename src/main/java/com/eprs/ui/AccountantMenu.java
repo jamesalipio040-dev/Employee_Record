@@ -274,7 +274,7 @@ public class AccountantMenu {
 
         payrollDao.deletePayroll(payrollId);
         logDao.logActivity(accountant.id(), accountant.username(), "Admin deleted User ID " + payrollId);
-        System.out.println("-> [SUCCESS] User ID " + payrollId + " deleted successfully.");
+        System.out.println("-> [SUCCESS] Payroll ID " + payrollId + " deleted successfully.");
     }
 
 }
