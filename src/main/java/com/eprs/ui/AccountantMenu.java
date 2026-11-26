@@ -260,7 +260,7 @@ public class AccountantMenu {
             return;
         }
 
-        int payrollId = readInt("Enter User ID to Delete (or 0 to Cancel): ");
+        int payrollId = readInt("Enter Employee ID to Delete (or 0 to Cancel): ");
         if (payrollId == 0) {
             System.out.println("-> Operation Cancelled.");
             return;
